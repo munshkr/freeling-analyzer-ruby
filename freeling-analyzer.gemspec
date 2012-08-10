@@ -4,8 +4,11 @@ require File.expand_path('../lib/freeling/analyzer/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Damián Silvani"]
   gem.email         = ["munshkr@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.summary       = %q{Ruby wrapper for FreeLing's analyzer tool}
+  gem.description   = %q{FreeLing::Analyzer is a Ruby wrapper around
+                         `analyzer`, a binary tool included in FreeLing's
+                         package that allows the user to process a stream of
+                         text with FreeLing.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
@@ -17,4 +20,6 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "debugger"
+
+  gem.add_runtime_dependency "hashie"
 end
