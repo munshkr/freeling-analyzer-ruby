@@ -33,17 +33,17 @@ Or install it yourself as:
 
 ## FreeLing
 
-FreeLing is an open source suite of language analyzers written in C++.  The
-main services offered are: Text tokenization, sentence splitting, morphological
-analysis, suffix treatment, retokenization of clitic pronouns, flexible
-multiword recognition, contraction splitting, probabilistic prediction of
-unkown word categories, named entity detection, recognition of dates, numbers,
-ratios, currency, and physical magnitudes (speed, weight, temperature, density,
-etc.), PoS tagging, chart-based shallow parsing, named entity classification,
-WordNet based sense annotation and disambiguation, rule-based dependency
-parsing, and nominal correference resolution.  Currently supported languages
-are Spanish, Catalan, Galician, Italian, English, Welsh, Portuguese, and
-Asturian.
+[FreeLing](http://nlp.lsi.upc.edu/freeling/) is an open source suite of
+language analyzers written in C++.  The main services offered are: Text
+tokenization, sentence splitting, morphological analysis, suffix treatment,
+retokenization of clitic pronouns, flexible multiword recognition, contraction
+splitting, probabilistic prediction of unkown word categories, named entity
+detection, recognition of dates, numbers, ratios, currency, and physical
+magnitudes (speed, weight, temperature, density, etc.), PoS tagging,
+chart-based shallow parsing, named entity classification, WordNet based sense
+annotation and disambiguation, rule-based dependency parsing, and nominal
+correference resolution.  Currently supported languages are Spanish, Catalan,
+Galician, Italian, English, Welsh, Portuguese, and Asturian.
 
 ## To-Do
 
