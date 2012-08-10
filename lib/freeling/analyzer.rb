@@ -1,4 +1,5 @@
 require "open3"
+require "hashie/mash"
 
 module FreeLing
   class Analyzer
@@ -10,6 +11,8 @@ module FreeLing
 
     NotRunningError = Class.new(StandardError)
     AnalyzerError   = Class.new(StandardError)
+
+    Token = Class.new(Hashie::Mash)
 
 
     def initialize(document, opts={})
@@ -170,11 +173,12 @@ module FreeLing
 
     def parse_token_line(str)
       form, lemma, tag, prob = str.split(' ')[0..3]
-      { :form => form,
+      Token.new({
+        :form => form,
         :lemma => lemma,
         :tag => tag,
         :prob => prob,
-      }.reject {|k, v| v.nil?}
+      }.reject {|k, v| v.nil?})
     end
   end
 end
