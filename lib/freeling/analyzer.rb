@@ -1,13 +1,13 @@
-require 'open3'
+require "open3"
 
-ENV['FREELINGSHARE'] ||= '/usr/local/share/freeling'
+ENV["FREELINGSHARE"] ||= "/usr/local/share/freeling"
 
 module FreeLing
   class Analyzer
     attr_reader :document, :last_error
 
-    DEFAULT_ANALYZE_PATH = '/usr/local/bin/analyzer'
-    DEFAULT_CONFIG_PATH  = File.join(Padrino.root, 'config', 'freeling_es.cfg')
+    DEFAULT_ANALYZE_PATH = "/usr/local/bin/analyzer"
+    DEFAULT_CONFIG_PATH  = "/usr/local/share/freeling/config/es.cfg"
 
     NotRunningError     = Class.new(StandardError)
     AnalyzerError       = Class.new(StandardError)
