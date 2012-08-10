@@ -1,5 +1,5 @@
 module Freeling
-  module Analyzer
+  class Analyzer
     VERSION = "0.0.1"
   end
 end
