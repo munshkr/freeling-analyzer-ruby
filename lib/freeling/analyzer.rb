@@ -1,28 +1,32 @@
 require "open3"
 
-ENV["FREELINGSHARE"] ||= "/usr/local/share/freeling"
-
 module FreeLing
   class Analyzer
     attr_reader :document, :last_error
 
-    DEFAULT_ANALYZE_PATH = "/usr/local/bin/analyzer"
-    DEFAULT_CONFIG_PATH  = "/usr/local/share/freeling/config/es.cfg"
+    DEFAULT_ANALYZE_PATH        = "/usr/local/bin/analyzer"
+    DEFAULT_FREELING_SHARE_PATH = "/usr/local/share/freeling"
+    DEFAULT_CONFIG_PATH         = File.join(DEFAULT_FREELING_SHARE_PATH, "config/es.cfg")
 
-    NotRunningError     = Class.new(StandardError)
-    AnalyzerError       = Class.new(StandardError)
+    NotRunningError = Class.new(StandardError)
+    AnalyzerError   = Class.new(StandardError)
 
 
     def initialize(document, opts={})
       @document = document
 
       @options = {
+        :share_path => DEFAULT_FREELING_SHARE_PATH,
         :config_path => DEFAULT_CONFIG_PATH,
         :analyze_path => DEFAULT_ANALYZE_PATH,
         :input_format => :plain,
         :output_format => :tagged,
         :memoize => true,
       }.merge(opts)
+
+      unless Dir.exists?(@options[:share_path])
+        raise "#{@options[:share_path]} not found"
+      end
 
       unless File.exists?(@options[:analyze_path])
         raise "#{@options[:analyze_path]} not found"
@@ -100,7 +104,10 @@ module FreeLing
     end
 
     def run_process
-      @stdin, @stdout, @stderr, @wait_thr = Open3.popen3(command)
+      puts "Command: #{command}"
+      @stdin, @stdout, @stderr, @wait_thr = Open3.popen3({
+        "FREELINGSHARE" => @options[:share_path]
+      }, command)
 
       @write_thr = Thread.new do
         begin
