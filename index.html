@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Freeling::Analyzer : A Ruby wrapper for FreeLing's analyzer tool" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Freeling::Analyzer</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/munshkr/freeling-analyzer-ruby">View on GitHub</a>
+
+          <h1 id="project_title">Freeling::Analyzer</h1>
+          <h2 id="project_tagline">A Ruby wrapper for FreeLing's analyzer tool</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/munshkr/freeling-analyzer-ruby/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/munshkr/freeling-analyzer-ruby/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><strong>FreeLing::Analyzer</strong> is a Ruby wrapper around <code>analyzer</code>, a binary tool included
+in FreeLing's package that allows the user to process a stream of text with
+FreeLing.</p>
+
+<p><em>This has been tested with version 3.0a1 only</em>.</p>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre><span class="n">text</span> <span class="o">=</span> <span class="s2">"Mi amigo Juan Mesa se mesa la barba al lado de la mesa."</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="no">FreeLing</span><span class="o">::</span><span class="no">Analyzer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">analyzer</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">first</span>
+<span class="c1"># =&gt; #&lt;FreeLing::Analyzer::Token form="Mi" lemma="mi" </span>
+<span class="c1">#                                prob="0.995536" tag="DP1CSS"&gt;</span>
+
+<span class="n">analyzer</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma</span> <span class="p">}</span>
+<span class="c1"># =&gt; ["mi", "amigo", "juan_mesa", "se", "mesar", "el",</span>
+<span class="c1">#     "barba", "a+el", "lado", "de", "el", "mesa", "."]</span>
+</pre></div>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight"><pre><span class="n">gem</span> <span class="s1">'freeling-analyzer'</span>
+</pre></div>
+
+<p>And then execute:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>bundle
+</pre></div>
+
+<p>Or install it yourself as:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>gem install freeling-analyzer
+</pre></div>
+
+<h2>FreeLing</h2>
+
+<p><a href="http://nlp.lsi.upc.edu/freeling/">FreeLing</a> is an open source suite of
+language analyzers written in C++.  The main services offered are: Text
+tokenization, sentence splitting, morphological analysis, suffix treatment,
+retokenization of clitic pronouns, flexible multiword recognition, contraction
+splitting, probabilistic prediction of unkown word categories, named entity
+detection, recognition of dates, numbers, ratios, currency, and physical
+magnitudes (speed, weight, temperature, density, etc.), PoS tagging,
+chart-based shallow parsing, named entity classification, WordNet based sense
+annotation and disambiguation, rule-based dependency parsing, and nominal
+correference resolution.  Currently supported languages are Spanish, Catalan,
+Galician, Italian, English, Welsh, Portuguese, and Asturian.</p>
+
+<h2>To-Do</h2>
+
+<ul>
+<li>Dep and parsed outputs</li>
+<li>Train option (--train)</li>
+<li>More testing!</li>
+</ul><h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Freeling::Analyzer maintained by <a href="https://github.com/munshkr">munshkr</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
