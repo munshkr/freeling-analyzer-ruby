@@ -107,7 +107,6 @@ module FreeLing
     end
 
     def run_process
-      puts "Command: #{command}"
       @stdin, @stdout, @stderr, @wait_thr = Open3.popen3({
         "FREELINGSHARE" => @options[:share_path]
       }, command)
