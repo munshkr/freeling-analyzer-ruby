@@ -19,6 +19,13 @@ analyzer.tokens.map { |t| t.lemma }
 # => ["mi", "amigo", "juan_mesa", "se", "mesar", "el", "barba", "a+el", "lado", "de", "el", "mesa", "."]
 ```
 
+## Features
+
+* Analyzer is *lazy*, it does not spawn the process until needed and it sends
+  the input text to `analyzer` on demand.
+* It just works with the default instalation of FreeLing. Just set the language
+  to use and you're good to go (*to-do*).
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -51,6 +58,7 @@ Galician, Italian, English, Welsh, Portuguese, and Asturian.
 
 ## To-Do
 
+* Add :language option in initializer (use default language configuration path)
 * Dep and parsed outputs
 * Train option (--train)
 * More testing!
