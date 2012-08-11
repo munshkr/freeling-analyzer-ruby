@@ -1,27 +1,31 @@
 # Freeling::Analyzer
 
-FreeLing::Analyzer is a Ruby wrapper around `analyzer`, a binary tool included
-in FreeLing's package that allows the user to process a stream of text with
-FreeLing.
+**FreeLing::Analyzer** is a Ruby wrapper around `analyzer`, a binary tool
+included in FreeLing's package that allows the user to process a stream of text
+with FreeLing.
 
-*This has been tested with FreeLing 3.0a1 only*.
+*This has been tested with version 3.0a1 only*.
 
 ## Usage
 
-    text = "Mi amigo Juan Mesa se mesa la barba al lado de la mesa."
-    analyzer = FreeLing::Analyzer.new(text)
+```ruby
+text = "Mi amigo Juan Mesa se mesa la barba al lado de la mesa."
+analyzer = FreeLing::Analyzer.new(text)
 
-    analyzer.tokens.first
-    # => #<FreeLing::Analyzer::Token form="Mi" lemma="mi" prob="0.995536" tag="DP1CSS">
+analyzer.tokens.first
+# => #<FreeLing::Analyzer::Token form="Mi" lemma="mi" prob="0.995536" tag="DP1CSS">
 
-    analyzer.tokens.map { |t| t.lemma }
-    # => ["mi", "amigo", "juan_mesa", "se", "mesar", "el", "barba", "a+el", "lado", "de", "el", "mesa", "."]
+analyzer.tokens.map { |t| t.lemma }
+# => ["mi", "amigo", "juan_mesa", "se", "mesar", "el", "barba", "a+el", "lado", "de", "el", "mesa", "."]
+```
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'freeling-analyzer'
+```ruby
+gem 'freeling-analyzer'
+```
 
 And then execute:
 
