@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.version       = Freeling::Analyzer::VERSION
 
   gem.add_development_dependency "rake"
+  gem.add_development_dependency "yard"
   gem.add_development_dependency "debugger"
 
   gem.add_runtime_dependency "hashie"
