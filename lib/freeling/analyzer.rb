@@ -5,9 +5,9 @@ module FreeLing
   class Analyzer
     attr_reader :document, :last_error
 
-    DEFAULT_ANALYZE_PATH        = "/usr/local/bin/analyzer"
-    DEFAULT_FREELING_SHARE_PATH = "/usr/local/share/freeling"
-    DEFAULT_CONFIG_PATH         = File.join(DEFAULT_FREELING_SHARE_PATH, "config/es.cfg")
+    DEFAULT_ANALYZE_PATH         = "/usr/local/bin/analyzer"
+    DEFAULT_FREELING_SHARE_PATH  = "/usr/local/share/freeling"
+    DEFAULT_LANGUAGE_CONFIG_PATH = File.join(DEFAULT_FREELING_SHARE_PATH, "config")
 
     NotRunningError = Class.new(StandardError)
     AnalyzerError   = Class.new(StandardError)
@@ -19,8 +19,8 @@ module FreeLing
       @document = document
 
       @options = {
+        :language => :es,
         :share_path => DEFAULT_FREELING_SHARE_PATH,
-        :config_path => DEFAULT_CONFIG_PATH,
         :analyze_path => DEFAULT_ANALYZE_PATH,
         :input_format => :plain,
         :output_format => :tagged,
@@ -35,7 +35,7 @@ module FreeLing
         raise "#{@options[:analyze_path]} not found"
       end
 
-      unless File.exists?(@options[:config_path])
+      if @options[:config_path] and !File.exists?(@options[:config_path])
         raise "#{@options[:config_path]} not found"
       end
 
@@ -99,11 +99,15 @@ module FreeLing
   private
     def command
       "#{@options[:analyze_path]} " \
-        "-f #{@options[:config_path]} " \
+        "-f #{config_path} " \
         "--inpf #{@options[:input_format]} " \
         "--outf #{@options[:output_format]} " \
         "--nec " \
         "--noflush"
+    end
+
+    def config_path
+      @options[:config_path] || File.join(DEFAULT_LANGUAGE_CONFIG_PATH, "#{@options[:language]}.cfg")
     end
 
     def run_process
