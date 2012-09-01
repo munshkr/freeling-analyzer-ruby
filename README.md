@@ -13,7 +13,7 @@ text = "Mi amigo Juan Mesa se mesa la barba al lado de la mesa."
 analyzer = FreeLing::Analyzer.new(text, :language => :es)
 
 analyzer.tokens.first
-# => #<FreeLing::Analyzer::Token form="Mi" lemma="mi" prob="0.995536" tag="DP1CSS">
+# => #<FreeLing::Analyzer::Token form="Mi" lemma="mi" prob=0.995536 tag="DP1CSS">
 
 analyzer.tokens.map { |t| t.lemma }
 # => ["mi", "amigo", "juan_mesa", "se", "mesar", "el", "barba", "a+el", "lado", "de", "el", "mesa", "."]

@@ -180,7 +180,7 @@ module FreeLing
         :form => form,
         :lemma => lemma,
         :tag => tag,
-        :prob => prob,
+        :prob => prob.to_f,
       }.reject {|k, v| v.nil?})
     end
   end
