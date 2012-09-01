@@ -10,7 +10,7 @@ with FreeLing.
 
 ```ruby
 text = "Mi amigo Juan Mesa se mesa la barba al lado de la mesa."
-analyzer = FreeLing::Analyzer.new(text)
+analyzer = FreeLing::Analyzer.new(text, :language => :es)
 
 analyzer.tokens.first
 # => #<FreeLing::Analyzer::Token form="Mi" lemma="mi" prob="0.995536" tag="DP1CSS">
@@ -55,13 +55,6 @@ chart-based shallow parsing, named entity classification, WordNet based sense
 annotation and disambiguation, rule-based dependency parsing, and nominal
 correference resolution.  Currently supported languages are Spanish, Catalan,
 Galician, Italian, English, Welsh, Portuguese, and Asturian.
-
-## To-Do
-
-* Add :language option in initializer (use default language configuration path)
-* Dep and parsed outputs
-* Train option (--train)
-* More testing!
 
 ## Contributing
 
