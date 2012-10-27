@@ -24,7 +24,7 @@ analyzer.tokens.map { |t| t.lemma }
 * Analyzer is *lazy*, it does not spawn the process until needed and it sends
   the input text to `analyzer` on demand.
 * It just works with the default instalation of FreeLing. Just set the language
-  to use and you're good to go (*to-do*).
+  to use and you're good to go.
 
 ## Installation
 
