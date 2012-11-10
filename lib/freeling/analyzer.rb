@@ -19,7 +19,6 @@ module FreeLing
       @document = document
 
       @options = {
-        :language => :es,
         :share_path => DEFAULT_FREELING_SHARE_PATH,
         :analyze_path => DEFAULT_ANALYZE_PATH,
         :input_format => :plain,
@@ -37,6 +36,8 @@ module FreeLing
 
       if @options[:config_path] and !File.exists?(@options[:config_path])
         raise "#{@options[:config_path]} not found"
+      else
+        @options[:language] ||= :es
       end
 
       @last_error_mutex = Mutex.new
