@@ -1,8 +1,7 @@
 # encoding: utf-8
-require "test/unit"
-require File.expand_path("../../lib/freeling/analyzer", __FILE__)
+require "test_helper"
 
-class TestAnalyzer < Test::Unit::TestCase
+class AnalyzerTest < Test::Unit::TestCase
   def setup
     @a = "El gato come pescado y bebe agua."
     @b = "Yo bajo con el hombre bajo a tocar el bajo bajo la escalera."
