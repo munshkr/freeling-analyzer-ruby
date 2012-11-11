@@ -20,6 +20,8 @@ class AnalyzerTest < Test::Unit::TestCase
   end
 
   def test_token_list
+    skip
+
     expected_tokens = [
       { form: "El", lemma: "el", prob: 1, tag: "DA0MS0" },
       { form: "gato", lemma: "gato", prob: 1, tag: "NCMS000" },
