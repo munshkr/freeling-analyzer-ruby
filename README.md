@@ -1,4 +1,4 @@
-# Freeling::Analyzer
+# Freeling::Analyzer [![Build Status](https://secure.travis-ci.org/munshkr/freeling-analyzer-ruby.png?branch=master)](https://travis-ci.org/munshkr/freeling-analyzer-ruby)
 
 **FreeLing::Analyzer** is a Ruby wrapper around `analyzer`, a binary tool
 included in FreeLing's package that allows the user to process a stream of text
