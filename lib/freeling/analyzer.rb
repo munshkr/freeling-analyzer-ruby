@@ -1,5 +1,6 @@
 require "open3"
 require "hashie/mash"
+require "freeling/analyzer/process_wrapper"
 
 module FreeLing
   class Analyzer
