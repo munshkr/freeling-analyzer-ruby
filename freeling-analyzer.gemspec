@@ -20,10 +20,10 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "yard"
-  gem.add_development_dependency "guard"
-  gem.add_development_dependency "guard-test"
   gem.add_development_dependency "mocha"
   gem.add_development_dependency "minitest"
+  gem.add_development_dependency "guard"
+  gem.add_development_dependency "guard-minitest"
 
   gem.add_runtime_dependency "hashie"
 end
