@@ -9,6 +9,8 @@ class AnalyzerTest < MiniTest::Unit::TestCase
   end
 
   def test_token_attributes
+    skip
+
     expected_token = { form: "El", lemma: "el", prob: 1, tag: "DA0MS0" }
 
     analyzer = FreeLing::Analyzer.new(@a, :language => :es)
