@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "test_helper"
 
-class AnalyzerTest < Test::Unit::TestCase
+class AnalyzerTest < MiniTest::Unit::TestCase
   def setup
     @a = "El gato come pescado y bebe agua."
     @b = "Yo bajo con el hombre bajo a tocar el bajo bajo la escalera."
