@@ -40,4 +40,9 @@ class ProcessWrapperTest < Test::Unit::TestCase
     @pw.output_fd.rewind
     assert_equal @text, @pw.run.to_a
   end
+
+  def test_another_command
+    @pw.command = "cat -n"
+    assert_equal ["     1\tHello", "     2\tworld!"], @pw.run.to_a
+  end
 end
