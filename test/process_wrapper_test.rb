@@ -45,4 +45,9 @@ class ProcessWrapperTest < MiniTest::Unit::TestCase
     @pw.command = "cat -n"
     assert_equal ["     1\tHello", "     2\tworld!"], @pw.run.to_a
   end
+
+  def test_invalid_command
+    @pw.command = "inexistant_command"
+    assert_raises(Errno::ENOENT) { @pw.run }
+  end
 end
