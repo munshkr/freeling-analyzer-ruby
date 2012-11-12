@@ -5,12 +5,12 @@ require "open3"
 module FreeLing
   class Analyzer
     class ProcessWrapper
-      attr_accessor :command, :output_fd
+      attr_accessor :command, :output_fd, :env
 
-      def initialize(command, output_fd)
+      def initialize(command, output_fd, env={})
         @command = command
         @output_fd = output_fd
-        @env = {}
+        @env = env
       end
 
       def run
