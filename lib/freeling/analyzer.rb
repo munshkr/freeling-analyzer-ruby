@@ -182,8 +182,8 @@ module FreeLing
         :form => form,
         :lemma => lemma,
         :tag => tag,
-        :prob => prob.to_f,
-      }.reject {|k, v| v.nil?})
+        :prob => prob && prob.to_f,
+      }.reject { |k, v| v.nil? })
     end
   end
 end
