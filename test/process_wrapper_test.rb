@@ -66,12 +66,24 @@ class ProcessWrapperTest < MiniTest::Unit::TestCase
 
   def test_invalid_command
     @pw.command = "inexistant_command"
-    assert_raises(Errno::ENOENT) { @pw.run }
+    assert_raises(Errno::ENOENT) { @pw.run.first }
   end
 
   def test_custom_env_variables
     @pw.env["MY_VARIABLE"] = "foobar"
     @pw.command = "echo $MY_VARIABLE"
     assert_equal "foobar", @pw.run.first
+  end
+
+  def test_run_process_that_only_prints_to_stderr
+    @pw.command = "echo 'this is only printed on stderr' > /dev/fd/2"
+    assert @pw.run.first.nil?
+    assert @pw.error_log = "this is only printed on stderr\n"
+  end
+
+  def test_close_process_early
+    @pw.command = "echo '1\n2\n3'"
+    assert_equal @pw.run.first, "1"
+    @pw.close
   end
 end

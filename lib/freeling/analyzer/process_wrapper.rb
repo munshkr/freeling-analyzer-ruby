@@ -5,18 +5,21 @@ require "open3"
 module FreeLing
   class Analyzer
     class ProcessWrapper
-      attr_accessor :command, :output_fd, :env
+      attr_accessor :command, :output_fd, :env, :error_log
 
       def initialize(command, output_fd, env={})
         @command = command
         @output_fd = output_fd
         @env = env
+        @error_log = nil
       end
 
       def run
-        open_process
+        @error_log = nil
 
         Enumerator.new do |yielder|
+          open_process
+
           if @stdout.nil?
             run_process
           end
@@ -31,9 +34,14 @@ module FreeLing
           end
 
           @stdout.close_read
+          @error_log = @stderr.read
           @write_thr.join
           close_process
         end
+      end
+
+      def close
+        close_process
       end
 
     private
@@ -45,10 +53,7 @@ module FreeLing
             IO.copy_stream(@output_fd, @stdin)
             @stdin.close_write
           rescue Errno::EPIPE
-            raise
-            #@last_error_mutex.synchronize do
-            #  @last_error = @stderr.read.chomp
-            #end
+            @error_log = @stderr.read
           end
         end
       end
