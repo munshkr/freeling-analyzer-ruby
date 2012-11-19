@@ -26,11 +26,7 @@ module FreeLing
 
           while line = @stdout.gets
             line.chomp!
-            if line.empty?
-              yielder << nil
-            else
-              yielder << line
-            end
+            yielder << line
           end
 
           @stdout.close_read

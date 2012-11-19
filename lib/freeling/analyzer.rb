@@ -4,14 +4,11 @@ require "freeling/analyzer/process_wrapper"
 
 module FreeLing
   class Analyzer
-    attr_reader :document, :last_error
+    attr_reader :document, :latest_error_log
 
     DEFAULT_ANALYZE_PATH         = "/usr/local/bin/analyzer"
     DEFAULT_FREELING_SHARE_PATH  = "/usr/local/share/freeling"
     DEFAULT_LANGUAGE_CONFIG_PATH = File.join(DEFAULT_FREELING_SHARE_PATH, "config")
-
-    NotRunningError = Class.new(StandardError)
-    AnalyzerError   = Class.new(StandardError)
 
     Token = Class.new(Hashie::Mash)
 
@@ -40,8 +37,6 @@ module FreeLing
       else
         @options[:language] ||= :es
       end
-
-      @last_error_mutex = Mutex.new
     end
 
     def sentences(run_again=false)
@@ -93,10 +88,6 @@ module FreeLing
       end
     end
 
-    def close
-      clean_process
-    end
-
 
   private
     def command
@@ -112,67 +103,21 @@ module FreeLing
       @options[:config_path] || File.join(DEFAULT_LANGUAGE_CONFIG_PATH, "#{@options[:language]}.cfg")
     end
 
-    def run_process
-      @stdin, @stdout, @stderr, @wait_thr = Open3.popen3({
-        "FREELINGSHARE" => @options[:share_path]
-      }, command)
-
-      @write_thr = Thread.new do
-        begin
-          # TODO Read and write in chunks for better performance and lower
-          # memory footprint. This is specially useful with large documents.
-          str = @document.respond_to?(:read) ? @document.read : @document
-          @stdin.write(str)
-          @stdin.close_write
-        rescue Errno::EPIPE
-          @last_error_mutex.synchronize do
-            @last_error = @stderr.read.chomp
-          end
-        end
-      end
-    end
-
-    def clean_process
-      close_fds
-      kill_threads
-      @stdin = @stdout = @stderr = nil
-      @wait_thr = @write_thr = nil
-    end
-
-    def close_fds
-      [@stdin, @stdout, @stderr].each do |fd|
-        if fd and not fd.closed?
-          fd.close
-        end
-      end
-    end
-
-    def kill_threads
-      [@wait_thr, @write_thr].each do |thr|
-        if thr and thr.alive?
-          thr.kill
-        end
-      end
-    end
-
     def read_tokens
       Enumerator.new do |yielder|
-        if @stdout.nil?
-          run_process
-        end
+        output_fd = @document.respond_to?(:read) ? @document : StringIO.new(@document)
+        @process_wrapper = ProcessWrapper.new(command, output_fd, "FREELINGSHARE" => @options[:share_path])
 
-        while line = @stdout.gets
-          line.chomp!
-          if line.empty?
-            yielder << nil
-          else
+        @process_wrapper.run.each do |line|
+          if not line.empty?
             yielder << parse_token_line(line)
           end
         end
 
-        @stdout.close_read
-        @write_thr.join
-        clean_process
+        @latest_error_log = @process_wrapper.error_log
+
+        @process_wrapper.close
+        @process_wrapper = nil
       end
     end
 
