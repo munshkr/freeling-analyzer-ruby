@@ -103,21 +103,29 @@ module FreeLing
       @options[:config_path] || File.join(DEFAULT_LANGUAGE_CONFIG_PATH, "#{@options[:language]}.cfg")
     end
 
-    def read_tokens
+    def read_lines
       Enumerator.new do |yielder|
         output_fd = @document.respond_to?(:read) ? @document : StringIO.new(@document)
         @process_wrapper = ProcessWrapper.new(command, output_fd, "FREELINGSHARE" => @options[:share_path])
 
         @process_wrapper.run.each do |line|
-          if not line.empty?
-            yielder << parse_token_line(line)
-          end
+          yielder << line
         end
 
         @latest_error_log = @process_wrapper.error_log
 
         @process_wrapper.close
         @process_wrapper = nil
+      end
+    end
+
+    def read_tokens
+      Enumerator.new do |yielder|
+        read_lines.each do |line|
+          if not line.empty?
+            yielder << parse_token_line(line)
+          end
+        end
       end
     end
 
