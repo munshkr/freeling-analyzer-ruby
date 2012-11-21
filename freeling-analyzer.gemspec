@@ -27,4 +27,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "guard-minitest"
 
   gem.add_runtime_dependency "hashie"
+  gem.add_runtime_dependency "parslet"
 end

@@ -88,6 +88,10 @@ module FreeLing
       end
     end
 
+    def dependency_tree
+      DependencyTreeParser.new.parse(read_lines)
+    end
+
 
   private
     def command
