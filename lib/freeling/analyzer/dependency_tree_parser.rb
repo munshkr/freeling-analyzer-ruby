@@ -41,12 +41,10 @@ module FreeLing
       }
 
       rule(:tree) {
-        node.as(:node) >> (
-          spaces >> lbracket >> spaces >> (
+        (node >> spaces >> lbracket >> spaces >> (
             tree >> (spaces >> tree).repeat
           ).maybe.as(:children) >>
-          spaces >> rbracket
-        ).maybe
+          spaces >> rbracket) | node
       }
 
       root(:tree)
