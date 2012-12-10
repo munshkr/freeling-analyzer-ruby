@@ -47,7 +47,11 @@ module FreeLing
           spaces >> rbracket) | node
       }
 
-      root(:tree)
+      rule(:top) {
+        spaces? >> tree.maybe >> spaces?
+      }
+
+      root(:top)
     end
   end # Analyzer
 end # FreeLing

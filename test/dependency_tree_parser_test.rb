@@ -111,8 +111,9 @@ class DependencyTreeParserTest < MiniTest::Unit::TestCase
     }, res)
   end
 
-  def test_single_tree
-    skip
+  def test_empty_tree
+    res = parse("")
+    assert_equal("", res)
   end
 
 private
