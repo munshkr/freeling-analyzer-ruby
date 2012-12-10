@@ -14,14 +14,15 @@ module FreeLing
 
       # Labels
       rule(:label) { match("[\w-]").repeat(1) }
-      rule(:ancestor_label)   { string }
-      rule(:dependence_label) { string }
+      rule(:ancestor_label)   { nstring }
+      rule(:dependence_label) { nstring }
 
       # Token parts
-      rule(:string) { match("[A-Za-z0-9_,.]").repeat(1) }
-      rule(:form)  { string }
+      rule(:string) { match("[^\s]").repeat(1) }
+      rule(:nstring) { match("[A-Za-z0-9.,:;_\\-]").repeat(1) }
+      rule(:form)  { nstring }
       rule(:lemma) { string }
-      rule(:tag)   { string }
+      rule(:tag)   { nstring }
       # FIXME describe coref_group correctly
       rule(:coref_group) { str('-') }
 
@@ -34,7 +35,6 @@ module FreeLing
         rparen
       }
 
-      # Tree node
       rule(:node) {
         ancestor_label.as(:ancestor_label) >> slash >>
         dependence_label.as(:dependence_label) >> slash >>
@@ -42,7 +42,12 @@ module FreeLing
       }
 
       rule(:tree) {
-        spaces? >> node.maybe >> spaces?
+        node.as(:node) >> (
+          spaces >> lbracket >> spaces >> (
+            tree >> (spaces >> tree).repeat
+          ).maybe.as(:children) >>
+          spaces >> rbracket
+        ).maybe
       }
 
       root(:tree)
