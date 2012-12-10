@@ -13,16 +13,15 @@ module FreeLing
       rule(:spaces?)  { spaces.maybe }
 
       # Labels
-      rule(:label) { match("[\w-]").repeat(1) }
-      rule(:ancestor_label)   { nstring }
-      rule(:dependence_label) { nstring }
+      rule(:label_string) { match("[^/]").repeat(1) }
+      rule(:ancestor_label)   { label_string }
+      rule(:dependence_label) { label_string }
 
       # Token parts
-      rule(:string) { match("[^\s]").repeat(1) }
-      rule(:nstring) { match("[A-Za-z0-9.,:;_\\-]").repeat(1) }
-      rule(:form)  { nstring }
-      rule(:lemma) { string }
-      rule(:tag)   { nstring }
+      rule(:token_string) { match("[^\s]").repeat(1) }
+      rule(:form)  { token_string }
+      rule(:lemma) { token_string }
+      rule(:tag)   { token_string }
       # FIXME describe coref_group correctly
       rule(:coref_group) { str('-') }
 
