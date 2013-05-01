@@ -1,5 +1,5 @@
 require "minitest/autorun"
 require "minitest/wscolor"
-require "mocha"
+require "mocha/setup"
 
 require "freeling/analyzer"
