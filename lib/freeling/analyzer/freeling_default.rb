@@ -17,6 +17,18 @@ module FreeLing
         def freeling_path
           self.new.freeling_path
         end
+
+        def language_config
+          self.new.language_config
+        end
+      end
+
+      def language_config
+        if freeling_path.instance_of? String
+          File.join(freeling_path, "config")
+        else
+          raise_error(:analyze)
+        end
       end
 
       def analyzer_path

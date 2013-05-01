@@ -9,7 +9,7 @@ module FreeLing
 
     DEFAULT_ANALYZE_PATH         = FreelingDefault.analyzer_path
     DEFAULT_FREELING_SHARE_PATH  = FreelingDefault.freeling_path
-    DEFAULT_LANGUAGE_CONFIG_PATH = File.join(DEFAULT_FREELING_SHARE_PATH, "config")
+    DEFAULT_LANGUAGE_CONFIG_PATH = FreelingDefault.language_config
 
     Token = Class.new(Hashie::Mash)
 
