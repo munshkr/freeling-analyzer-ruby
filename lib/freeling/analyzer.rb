@@ -1,13 +1,14 @@
 require "open3"
 require "hashie/mash"
 require "freeling/analyzer/process_wrapper"
+require "freeling/analyzer/freeling_default"
 
 module FreeLing
   class Analyzer
     attr_reader :document, :latest_error_log
 
-    DEFAULT_ANALYZE_PATH         = "/usr/local/bin/analyzer"
-    DEFAULT_FREELING_SHARE_PATH  = "/usr/local/share/freeling"
+    DEFAULT_ANALYZE_PATH         = FreelingDefault.analyzer_path
+    DEFAULT_FREELING_SHARE_PATH  = FreelingDefault.freeling_path
     DEFAULT_LANGUAGE_CONFIG_PATH = File.join(DEFAULT_FREELING_SHARE_PATH, "config")
 
     Token = Class.new(Hashie::Mash)
