@@ -18,26 +18,14 @@ module FreeLing
       @document = document
 
       @options = {
-        :share_path => DEFAULT_FREELING_SHARE_PATH,
-        :analyze_path => DEFAULT_ANALYZE_PATH,
-        :input_format => :plain,
+        :share_path    => DEFAULT_FREELING_SHARE_PATH,
+        :analyze_path  => DEFAULT_ANALYZE_PATH,
+        :config_path   => DEFAULT_LANGUAGE_CONFIG_PATH,
+        :input_format  => :plain,
         :output_format => :tagged,
-        :memoize => true,
+        :memoize       => true,
+        :language      => :es
       }.merge(opts)
-
-      unless Dir.exists?(@options[:share_path])
-        raise "#{@options[:share_path]} not found"
-      end
-
-      unless File.exists?(@options[:analyze_path])
-        raise "#{@options[:analyze_path]} not found"
-      end
-
-      if @options[:config_path] and !File.exists?(@options[:config_path])
-        raise "#{@options[:config_path]} not found"
-      else
-        @options[:language] ||= :es
-      end
     end
 
     def sentences(run_again=false)
