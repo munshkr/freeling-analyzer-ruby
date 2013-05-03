@@ -13,7 +13,7 @@ module FreeLing
       @document = document
 
       @options = {
-        :share_path    => analyze_path,
+        :share_path    => analyzer_path,
         :analyze_path  => freeling_path,
         :input_format  => :plain,
         :output_format => :tagged,
@@ -114,20 +114,16 @@ module FreeLing
       }.reject { |k, v| v.nil? })
     end
 
-    def freeling_default
-      FreelingDefault
-    end
-
     def language_config
-      freeling_default.language_config
+      FreelingDefault.language_config
     end
 
     def freeling_path
-      freeling_default.freeling_path
+      FreelingDefault.freeling_path
     end
 
-    def analyze_path
-      freeling_default.analyze_path
+    def analyzer_path
+      FreelingDefault.analyzer_path
     end
   end
 end

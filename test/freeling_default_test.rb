@@ -30,4 +30,12 @@ class FreelingDefaultTest < MiniTest::Unit::TestCase
       FreeLing::Analyzer::FreelingDefault.analyzer_path.must_equal @local_bin_analyzer
     }.must_raise RuntimeError
   end
+
+  def test_instanciate_analyzer
+    File.stubs("exists?").with(@local_bin_analyzer).returns(true)
+    Dir.stubs("exists?").with(@local_share_freeling).returns(true)
+    document = mock("document")
+
+    assert FreeLing::Analyzer.new document
+  end
 end
