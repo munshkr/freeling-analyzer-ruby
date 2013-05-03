@@ -13,8 +13,8 @@ module FreeLing
       @document = document
 
       @options = {
-        :share_path    => analyzer_path,
-        :analyze_path  => freeling_path,
+        :share_path    => freeling_path,
+        :analyze_path  => analyzer_path,
         :input_format  => :plain,
         :output_format => :tagged,
         :memoize       => true,
