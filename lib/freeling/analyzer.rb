@@ -7,20 +7,14 @@ module FreeLing
   class Analyzer
     attr_reader :document, :latest_error_log
 
-    DEFAULT_ANALYZE_PATH         = FreelingDefault.analyzer_path
-    DEFAULT_FREELING_SHARE_PATH  = FreelingDefault.freeling_path
-    DEFAULT_LANGUAGE_CONFIG_PATH = FreelingDefault.language_config
-
     Token = Class.new(Hashie::Mash)
-
 
     def initialize(document, opts={})
       @document = document
 
       @options = {
-        :share_path    => DEFAULT_FREELING_SHARE_PATH,
-        :analyze_path  => DEFAULT_ANALYZE_PATH,
-        :config_path   => DEFAULT_LANGUAGE_CONFIG_PATH,
+        :share_path    => analyze_path,
+        :analyze_path  => freeling_path,
         :input_format  => :plain,
         :output_format => :tagged,
         :memoize       => true,
@@ -89,7 +83,7 @@ module FreeLing
     end
 
     def config_path
-      @options[:config_path] || File.join(DEFAULT_LANGUAGE_CONFIG_PATH, "#{@options[:language]}.cfg")
+      @options[:config_path] || File.join(language_config, "#{@options[:language]}.cfg")
     end
 
     def read_tokens
@@ -118,6 +112,22 @@ module FreeLing
         :tag => tag,
         :prob => prob && prob.to_f,
       }.reject { |k, v| v.nil? })
+    end
+
+    def freeling_default
+      FreelingDefault
+    end
+
+    def language_config
+      freeling_default.language_config
+    end
+
+    def freeling_path
+      freeling_default.freeling_path
+    end
+
+    def analyze_path
+      freeling_default.analyze_path
     end
   end
 end
