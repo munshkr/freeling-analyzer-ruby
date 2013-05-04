@@ -7,37 +7,19 @@ module FreeLing
   class Analyzer
     attr_reader :document, :latest_error_log
 
-    DEFAULT_ANALYZE_PATH         = FreelingDefault.analyzer_path
-    DEFAULT_FREELING_SHARE_PATH  = FreelingDefault.freeling_path
-    DEFAULT_LANGUAGE_CONFIG_PATH = FreelingDefault.language_config
-
     Token = Class.new(Hashie::Mash)
-
 
     def initialize(document, opts={})
       @document = document
 
       @options = {
-        :share_path => DEFAULT_FREELING_SHARE_PATH,
-        :analyze_path => DEFAULT_ANALYZE_PATH,
-        :input_format => :plain,
+        :share_path    => freeling_path,
+        :analyze_path  => analyzer_path,
+        :input_format  => :plain,
         :output_format => :tagged,
-        :memoize => true,
+        :memoize       => true,
+        :language      => :es
       }.merge(opts)
-
-      unless Dir.exists?(@options[:share_path])
-        raise "#{@options[:share_path]} not found"
-      end
-
-      unless File.exists?(@options[:analyze_path])
-        raise "#{@options[:analyze_path]} not found"
-      end
-
-      if @options[:config_path] and !File.exists?(@options[:config_path])
-        raise "#{@options[:config_path]} not found"
-      else
-        @options[:language] ||= :es
-      end
     end
 
     def sentences(run_again=false)
@@ -101,7 +83,7 @@ module FreeLing
     end
 
     def config_path
-      @options[:config_path] || File.join(DEFAULT_LANGUAGE_CONFIG_PATH, "#{@options[:language]}.cfg")
+      @options[:config_path] || File.join(language_config, "#{@options[:language]}.cfg")
     end
 
     def read_tokens
@@ -130,6 +112,18 @@ module FreeLing
         :tag => tag,
         :prob => prob && prob.to_f,
       }.reject { |k, v| v.nil? })
+    end
+
+    def language_config
+      FreelingDefault.language_config
+    end
+
+    def freeling_path
+      FreelingDefault.freeling_path
+    end
+
+    def analyzer_path
+      FreelingDefault.analyzer_path
     end
   end
 end
