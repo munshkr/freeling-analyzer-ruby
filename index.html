@@ -31,27 +31,34 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p><strong>FreeLing::Analyzer</strong> is a Ruby wrapper around <code>analyzer</code>, a binary tool included
-in FreeLing's package that allows the user to process a stream of text with
-FreeLing.</p>
+        <h1>Freeling::Analyzer</h1>
 
-<p><em>This has been tested with version 3.0a1 only</em>.</p>
+<p><strong>FreeLing::Analyzer</strong> is a Ruby wrapper around <code>analyzer</code>, a binary tool
+included in FreeLing's package that allows the user to process a stream of text
+with FreeLing.</p>
+
+<p><em>This has been tested with version 3.0+ only</em>.</p>
 
 <h2>Usage</h2>
 
 <div class="highlight"><pre><span class="n">text</span> <span class="o">=</span> <span class="s2">"Mi amigo Juan Mesa se mesa la barba al lado de la mesa."</span>
-<span class="n">analyzer</span> <span class="o">=</span> <span class="no">FreeLing</span><span class="o">::</span><span class="no">Analyzer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="ss">FreeLing</span><span class="p">:</span><span class="ss">:Analyzer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="ss">:language</span> <span class="o">=&gt;</span> <span class="ss">:es</span><span class="p">)</span>
 
 <span class="n">analyzer</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">first</span>
-<span class="c1"># =&gt; #&lt;FreeLing::Analyzer::Token form="Mi" lemma="mi" </span>
-<span class="c1">#                                prob="0.995536" tag="DP1CSS"&gt;</span>
+<span class="c1"># =&gt; #&lt;FreeLing::Analyzer::Token form="Mi" lemma="mi" prob=0.995536 tag="DP1CSS"&gt;</span>
 
 <span class="n">analyzer</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma</span> <span class="p">}</span>
-<span class="c1"># =&gt; ["mi", "amigo", "juan_mesa", "se", "mesar", "el",</span>
-<span class="c1">#     "barba", "a+el", "lado", "de", "el", "mesa", "."]</span>
+<span class="c1"># =&gt; ["mi", "amigo", "juan_mesa", "se", "mesar", "el", "barba", "a+el", "lado", "de", "el", "mesa", "."]</span>
 </pre></div>
 
-<h2>Installation</h2>
+<h2>Features</h2>
+
+<ul>
+<li>Analyzer is <em>lazy</em>, it does not spawn the process until needed and it sends
+the input text to <code>analyzer</code> on demand.</li>
+<li>It just works with the default instalation of FreeLing. Just set the language
+to use and you're good to go.</li>
+</ul><h2>Installation</h2>
 
 <p>Add this line to your application's Gemfile:</p>
 
@@ -60,34 +67,50 @@ FreeLing.</p>
 
 <p>And then execute:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>bundle
-</pre></div>
+<pre><code>$ bundle
+</code></pre>
 
 <p>Or install it yourself as:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>gem install freeling-analyzer
-</pre></div>
+<pre><code>$ gem install freeling-analyzer
+</code></pre>
 
 <h2>FreeLing</h2>
 
 <p><a href="http://nlp.lsi.upc.edu/freeling/">FreeLing</a> is an open source suite of
-language analyzers written in C++.  The main services offered are: Text
-tokenization, sentence splitting, morphological analysis, suffix treatment,
-retokenization of clitic pronouns, flexible multiword recognition, contraction
-splitting, probabilistic prediction of unkown word categories, named entity
-detection, recognition of dates, numbers, ratios, currency, and physical
-magnitudes (speed, weight, temperature, density, etc.), PoS tagging,
-chart-based shallow parsing, named entity classification, WordNet based sense
-annotation and disambiguation, rule-based dependency parsing, and nominal
-correference resolution.  Currently supported languages are Spanish, Catalan,
-Galician, Italian, English, Welsh, Portuguese, and Asturian.</p>
+language analyzers written in C++.</p>
 
-<h2>To-Do</h2>
+<p>The main services offered are:</p>
 
 <ul>
-<li>Dep and parsed outputs</li>
-<li>Train option (--train)</li>
-<li>More testing!</li>
+<li>Text tokenization</li>
+<li>Sentence splitting</li>
+<li>Morphological analysis</li>
+<li>Suffix treatment</li>
+<li>Retokenization of clitic pronouns</li>
+<li>Flexible multiword recognition</li>
+<li>Contraction splitting</li>
+<li>Probabilistic prediction of unkown word categories</li>
+<li>Named entity detection (NER)</li>
+<li>Recognition of dates, numbers, ratios, currency, and physical magnitudes
+(speed, weight, temperature, density, etc.)</li>
+<li>PoS tagging</li>
+<li>Chart-based shallow parsing</li>
+<li>Named entity classification (NEC)</li>
+<li>WordNet based sense annotation and disambiguation</li>
+<li>Rule-based dependency parsing</li>
+<li>Nominal correference resolution.</li>
+</ul><p>Currently supported languages are:</p>
+
+<ul>
+<li>Spanish</li>
+<li>Catalan</li>
+<li>Galician</li>
+<li>Italian</li>
+<li>English</li>
+<li>Welsh</li>
+<li>Portuguese</li>
+<li>Asturian</li>
 </ul><h2>Contributing</h2>
 
 <ol>
