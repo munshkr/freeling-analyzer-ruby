@@ -4,7 +4,7 @@
 included in FreeLing's package that allows the user to process a stream of text
 with FreeLing.
 
-*This has been tested with version 3.0a1 only*.
+*This has been tested with version 3.0+ only*.
 
 ## Usage
 
