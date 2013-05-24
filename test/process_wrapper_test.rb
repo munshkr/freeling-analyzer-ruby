@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ProcessWrapperTest < MiniTest::Unit::TestCase
+class ProcessWrapperTest < MiniTest::Test
   def setup
     @command = "cat"
     @text = ["Hello", "world!"]

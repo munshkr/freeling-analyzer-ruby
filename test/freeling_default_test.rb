@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FreelingDefaultTest < MiniTest::Unit::TestCase
+class FreelingDefaultTest < MiniTest::Test
   def setup
     @usr_bin_analyzer     = "/usr/bin/analyzer"
     @local_bin_analyzer   = "/usr/local/bin/analyzer"
@@ -12,23 +12,23 @@ class FreelingDefaultTest < MiniTest::Unit::TestCase
     File.stubs("exists?").with(@usr_bin_analyzer).returns(true)
     File.stubs("exists?").with(@local_bin_analyzer).returns(false)
 
-    FreeLing::Analyzer::FreelingDefault.analyzer_path.must_equal @usr_bin_analyzer
+    assert_equal FreeLing::Analyzer::FreelingDefault.analyzer_path, @usr_bin_analyzer
   end
 
   def test_freeling_installed_on_local
     File.stubs("exists?").with(@usr_bin_analyzer).returns(false)
     File.stubs("exists?").with(@local_bin_analyzer).returns(true)
 
-    FreeLing::Analyzer::FreelingDefault.analyzer_path.must_equal @local_bin_analyzer
+    assert_equal FreeLing::Analyzer::FreelingDefault.analyzer_path, @local_bin_analyzer
   end
 
   def test_freeling_not_installed
     File.stubs("exists?").with(@usr_bin_analyzer).returns(false)
     File.stubs("exists?").with(@local_bin_analyzer).returns(false)
 
-    lambda {
-      FreeLing::Analyzer::FreelingDefault.analyzer_path.must_equal @local_bin_analyzer
-    }.must_raise RuntimeError
+    assert_raises(RuntimeError) do
+      assert_equal FreeLing::Analyzer::FreelingDefault.analyzer_path, @local_bin_analyzer
+    end
   end
 
   def test_instanciate_analyzer
@@ -36,6 +36,6 @@ class FreelingDefaultTest < MiniTest::Unit::TestCase
     Dir.stubs("exists?").with(@local_share_freeling).returns(true)
     document = mock("document")
 
-    assert FreeLing::Analyzer.new document
+    assert FreeLing::Analyzer.new(document)
   end
 end
