@@ -20,12 +20,11 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "yard"
-  gem.add_development_dependency "mocha"
-  gem.add_development_dependency "minitest"
-  gem.add_development_dependency "minitest-wscolor"
-  gem.add_development_dependency "guard"
-  gem.add_development_dependency "guard-minitest"
+  gem.add_development_dependency "mocha", "~> 0.14.0"
+  gem.add_development_dependency "minitest", "~> 4.7.4"
+  gem.add_development_dependency "guard", "~> 1.8.0"
+  gem.add_development_dependency "guard-minitest", "~> 0.5.0"
 
-  gem.add_runtime_dependency "hashie"
-  gem.add_runtime_dependency "parslet"
+  gem.add_runtime_dependency "hashie", "~> 2.0.5"
+  gem.add_runtime_dependency "parslet", "~> 1.5.0"
 end

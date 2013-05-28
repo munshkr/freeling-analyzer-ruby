@@ -4,7 +4,7 @@
 included in FreeLing's package that allows the user to process a stream of text
 with FreeLing.
 
-*This has been tested with version 3.0a1 only*.
+*This has been tested with version 3.0+ only*.
 
 ## Usage
 
@@ -25,6 +25,7 @@ analyzer.tokens.map { |t| t.lemma }
   the input text to `analyzer` on demand.
 * It just works with the default instalation of FreeLing. Just set the language
   to use and you're good to go.
+* It supports Freeling's [client/server mode](http://nlp.lsi.upc.edu/freeling/doc/userman/html/node84.html). Ex: `FreeLing::Analyzer.new(text, :server_host => 'localhost:50005')` (`analyze` must be running in server mode)
 
 ## Installation
 
@@ -45,16 +46,36 @@ Or install it yourself as:
 ## FreeLing
 
 [FreeLing](http://nlp.lsi.upc.edu/freeling/) is an open source suite of
-language analyzers written in C++.  The main services offered are: Text
-tokenization, sentence splitting, morphological analysis, suffix treatment,
-retokenization of clitic pronouns, flexible multiword recognition, contraction
-splitting, probabilistic prediction of unkown word categories, named entity
-detection, recognition of dates, numbers, ratios, currency, and physical
-magnitudes (speed, weight, temperature, density, etc.), PoS tagging,
-chart-based shallow parsing, named entity classification, WordNet based sense
-annotation and disambiguation, rule-based dependency parsing, and nominal
-correference resolution.  Currently supported languages are Spanish, Catalan,
-Galician, Italian, English, Welsh, Portuguese, and Asturian.
+language analyzers written in C++.
+
+The main services offered are:
+  * Text tokenization
+  * Sentence splitting
+  * Morphological analysis
+  * Suffix treatment
+  * Retokenization of clitic pronouns
+  * Flexible multiword recognition
+  * Contraction splitting
+  * Probabilistic prediction of unkown word categories
+  * Named entity detection (NER)
+  * Recognition of dates, numbers, ratios, currency, and physical magnitudes
+    (speed, weight, temperature, density, etc.)
+  * PoS tagging
+  * Chart-based shallow parsing
+  * Named entity classification (NEC)
+  * WordNet based sense annotation and disambiguation
+  * Rule-based dependency parsing
+  * Nominal correference resolution.
+
+Currently supported languages are:
+  * Spanish
+  * Catalan
+  * Galician
+  * Italian
+  * English
+  * Welsh
+  * Portuguese
+  * Asturian
 
 ## Contributing
 
