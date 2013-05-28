@@ -2,10 +2,12 @@ require 'test_helper'
 
 class FreelingDefaultTest < MiniTest::Test
   def setup
-    @usr_bin_analyzer     = "/usr/bin/analyzer"
-    @local_bin_analyzer   = "/usr/local/bin/analyzer"
-    @usr_share_freeling   = "/usr/share/freeling"
-    @local_share_freeling = "/usr/local/share/freeling"
+    @usr_bin_analyzer         = "/usr/bin/analyzer"
+    @local_bin_analyzer       = "/usr/local/bin/analyzer"
+    @usr_bin_analyze_client   = "/usr/bin/analyzer_client"
+    @local_bin_analyze_client = "/usr/local/bin/analyzer_client"
+    @usr_share_freeling       = "/usr/share/freeling"
+    @local_share_freeling     = "/usr/local/share/freeling"
   end
 
   def test_freeling_installed_on_usr
@@ -31,8 +33,9 @@ class FreelingDefaultTest < MiniTest::Test
     end
   end
 
-  def test_instanciate_analyzer
+  def test_instantiate_analyzer
     File.stubs("exists?").with(@local_bin_analyzer).returns(true)
+    File.stubs("exists?").with(@local_bin_analyze_client).returns(true)
     Dir.stubs("exists?").with(@local_share_freeling).returns(true)
     document = mock("document")
 
