@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FreelingDefaultTest < MiniTest::Test
+class FreelingDefaultTest < MiniTest::Unit::TestCase
   def setup
     @usr_bin_analyzer         = "/usr/bin/analyzer"
     @local_bin_analyzer       = "/usr/local/bin/analyzer"
