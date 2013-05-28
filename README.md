@@ -25,6 +25,7 @@ analyzer.tokens.map { |t| t.lemma }
   the input text to `analyzer` on demand.
 * It just works with the default instalation of FreeLing. Just set the language
   to use and you're good to go.
+* It supports Freeling's [client/server mode](http://nlp.lsi.upc.edu/freeling/doc/userman/html/node84.html). Ex: `FreeLing::Analyzer.new(text, :server_host => 'localhost:50005')` (`analyze` must be running in server mode)
 
 ## Installation
 
