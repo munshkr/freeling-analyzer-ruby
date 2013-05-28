@@ -14,12 +14,14 @@ module FreeLing
       @document = document
 
       @options = {
-        :share_path    => freeling_path,
-        :analyze_path  => analyzer_path,
-        :input_format  => :plain,
-        :output_format => :tagged,
-        :memoize       => true,
-        :language      => :es
+        :share_path          => freeling_path,
+        :analyze_path        => analyzer_path,
+        :input_format        => :plain,
+        :output_format       => :tagged,
+        :memoize             => true,
+        :language            => :es,
+        :server_host         => nil,
+        :analyze_client_path => analyzer_client_path
       }.merge(opts)
     end
 
@@ -75,12 +77,16 @@ module FreeLing
 
   private
     def command
-      "#{@options[:analyze_path]} " \
-        "-f #{config_path} " \
-        "--inpf #{@options[:input_format]} " \
-        "--outf #{@options[:output_format]} " \
-        "--nec " \
-        "--noflush"
+      if @options[:server_host].nil?
+        "#{@options[:analyze_path]} " \
+          "-f #{config_path} " \
+          "--inpf #{@options[:input_format]} " \
+          "--outf #{@options[:output_format]} " \
+          "--nec " \
+          "--noflush"
+      else
+        "#{@options[:analyze_client_path]} #{@options[:server_host]}"
+      end
     end
 
     def config_path
@@ -126,5 +132,10 @@ module FreeLing
     def analyzer_path
       FreelingDefault.analyzer_path
     end
+
+    def analyzer_client_path
+      FreelingDefault.analyzer_client_path
+    end
+
   end
 end

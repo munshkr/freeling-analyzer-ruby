@@ -2,15 +2,22 @@ module FreeLing
   class Analyzer
     class FreelingDefault
 
-      LOCAL_ANALYZE_PATH         = "/usr/local/bin/analyzer"
-      USR_ANALYZE_PATH           = "/usr/bin/analyzer"
-      LOCAL_FREELING_SHARE_PATH  = "/usr/local/share/freeling"
-      USR_FREELING_SHARE_PATH    = "/usr/share/freeling"
+      LOCAL_ANALYZE_PATH        = "/usr/local/bin/analyzer"
+      USR_ANALYZE_PATH          = "/usr/bin/analyzer"
+      LOCAL_ANALYZE_CLIENT_PATH = "/usr/local/bin/analyzer_client"
+      USR_ANALYZE_CLIENT_PATH   = "/usr/bin/analyzer_client"
+      LOCAL_FREELING_SHARE_PATH = "/usr/local/share/freeling"
+      USR_FREELING_SHARE_PATH   = "/usr/share/freeling"
 
       class << self
         def analyzer_path
           self.new.analyzer_path
         end
+
+        def analyzer_client_path
+          self.new.analyzer_client_path
+        end
+
 
         def freeling_path
           self.new.freeling_path
@@ -38,6 +45,17 @@ module FreeLing
           raise_error(:analyze)
         end
       end
+
+      def analyzer_client_path
+        if File.exists? LOCAL_ANALYZE_CLIENT_PATH
+          LOCAL_ANALYZE_CLIENT_PATH
+        elsif File.exists? USR_ANALYZE_CLIENT_PATH
+          USR_ANALYZE_CLIENT_PATH
+        else
+          raise_error(:analyze_client)
+        end
+      end
+
 
       def freeling_path
         if Dir.exists? LOCAL_FREELING_SHARE_PATH
