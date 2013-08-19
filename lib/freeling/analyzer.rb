@@ -99,7 +99,9 @@ module FreeLing
         @process_wrapper = ProcessWrapper.new(command, output_fd, "FREELINGSHARE" => @options[:share_path])
 
         @process_wrapper.run.each do |line|
-          if not line.empty?
+          if line.empty?
+            yielder << nil
+          else
             yielder << parse_token_line(line)
           end
         end
