@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
                          `analyzer`, a binary tool included in FreeLing's
                          package that allows the user to process a stream of
                          text with FreeLing.}
-  gem.homepage      = "https://github.com/munshkr/freeling-analyzer-ruby"
+  gem.homepage      = "http://munshkr.github.io/freeling-analyzer-ruby"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
