@@ -11,7 +11,7 @@ module FreeLing
     Token = Class.new(Hashie::Mash)
 
     def initialize(document, opts={})
-      @document = document
+      @document = document.encode('iso-8859-15')
 
       @options = {
         :share_path          => freeling_path,
@@ -114,6 +114,7 @@ module FreeLing
     end
 
     def parse_token_line(str)
+      str = str.force_encoding('iso-8859-15').encode('utf-8')
       form, lemma, tag, prob = str.split(' ')[0..3]
       Token.new({
         :form => form,

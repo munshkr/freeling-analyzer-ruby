@@ -38,6 +38,7 @@ class FreelingDefaultTest < MiniTest::Unit::TestCase
     File.stubs("exists?").with(@local_bin_analyze_client).returns(true)
     Dir.stubs("exists?").with(@local_share_freeling).returns(true)
     document = mock("document")
+    document.expects('encode').returns(document)
 
     assert FreeLing::Analyzer.new(document)
   end
