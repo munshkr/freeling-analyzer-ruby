@@ -6,6 +6,7 @@ class AnalyzerTest < MiniTest::Unit::TestCase
     @a = "El gato come pescado y bebe agua."
     @b = "Yo bajo con el hombre bajo a tocar el bajo bajo la escalera."
     @c = "Mi amigo Juan Mesa se mesa la barba al lado de la mesa."
+    @d = "Güemes fue un gran patriota."
   end
 
   def test_token_attributes
@@ -17,6 +18,11 @@ class AnalyzerTest < MiniTest::Unit::TestCase
     [:form, :lemma, :prob, :tag].each do |key|
       assert_equal expected_token[key], token[key]
     end
+  end
+
+  def test_token_encoding
+    analyzer = FreeLing::Analyzer.new(@d, :language => :es)
+    assert_equal analyzer.tokens.first['form'], 'Güemes'
   end
 
   def test_token_list
