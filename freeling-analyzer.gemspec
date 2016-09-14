@@ -30,6 +30,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard", "~> 1.8.0"
   spec.add_development_dependency "guard-minitest", "~> 0.5.0"
   spec.add_development_dependency "pry"
-
-  spec.add_dependency "hashie", "~> 2.0.5"
 end

@@ -1,14 +1,11 @@
 require "stringio"
 require "open3"
-require "hashie/mash"
 require "freeling/analyzer/process_wrapper"
 require "freeling/analyzer/freeling_default"
 
 module FreeLing
   class Analyzer
     attr_reader :document, :latest_error_log
-
-    Token = Class.new(Hashie::Mash)
 
     def initialize(document, opts={})
       @document = document
@@ -116,12 +113,11 @@ module FreeLing
 
     def parse_token_line(str)
       form, lemma, tag, prob = str.split(' ')[0..3]
-      Token.new({
-        :form => form,
+
+      { :form => form,
         :lemma => lemma,
         :tag => tag,
-        :prob => prob && prob.to_f,
-      }.reject { |k, v| v.nil? })
+        :prob => prob && prob.to_f }.reject { |k, v| v.nil? }
     end
 
     def language_config
