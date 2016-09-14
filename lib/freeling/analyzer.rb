@@ -16,7 +16,7 @@ module FreeLing
       @options = {
         :share_path          => freeling_path,
         :analyze_path        => analyzer_path,
-        :input_format        => :plain,
+        :input_format        => :text,
         :output_format       => :tagged,
         :memoize             => true,
         :language            => :es,
@@ -80,8 +80,9 @@ module FreeLing
       if @options[:server_host].nil?
         "#{@options[:analyze_path]} " \
           "-f #{config_path} " \
-          "--inpf #{@options[:input_format]} " \
-          "--outf #{@options[:output_format]} " \
+          "--inplv #{@options[:input_format]} " \
+          "--outlv #{@options[:output_format]} " \
+          "--ner " \
           "--nec " \
           "--noflush"
       else
